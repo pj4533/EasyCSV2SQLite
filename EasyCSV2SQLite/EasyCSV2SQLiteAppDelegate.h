@@ -8,10 +8,26 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface EasyCSV2SQLiteAppDelegate : NSObject <NSApplicationDelegate> {
+@interface EasyCSV2SQLiteAppDelegate : NSObject <NSApplicationDelegate, NSOpenSavePanelDelegate, NSTableViewDataSource, NSTableViewDelegate> {
     NSWindow *window;
+    NSMutableArray* columnNames;
+    
+    NSTextField *csvFile;
+    NSTextField *sqliteFile;
+    NSTextField *createdTableName;
+    NSProgressIndicator *progressBar;
+    NSTableView *mainTableView;
 }
+@property (assign) IBOutlet NSTextField *csvFile;
+@property (assign) IBOutlet NSTextField *sqliteFile;
+@property (assign) IBOutlet NSTextField *createdTableName;
+@property (assign) IBOutlet NSProgressIndicator *progressBar;
+@property (assign) IBOutlet NSTableView *mainTableView;
 
 @property (assign) IBOutlet NSWindow *window;
+- (IBAction)browseClicked:(id)sender;
+- (IBAction)chooseClicked:(id)sender;
+- (IBAction)goClicked:(id)sender;
+
 
 @end

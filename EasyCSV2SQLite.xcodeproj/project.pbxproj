@@ -13,6 +13,8 @@
 		0A33D4BD13DF092700863474 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0A33D4BB13DF092700863474 /* Credits.rtf */; };
 		0A33D4C013DF092800863474 /* EasyCSV2SQLiteAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33D4BF13DF092800863474 /* EasyCSV2SQLiteAppDelegate.m */; };
 		0A33D4C313DF092800863474 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A33D4C113DF092800863474 /* MainMenu.xib */; };
+		0AD725DD13DF14CC00EB8D52 /* DDFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD725DC13DF14CC00EB8D52 /* DDFileReader.m */; };
+		0AD725E013DF18E500EB8D52 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD725DF13DF18E500EB8D52 /* libsqlite3.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +23,17 @@
 		0A33D4AF13DF092700863474 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		0A33D4B013DF092700863474 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0A33D4B113DF092700863474 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		0A33D4B413DF092700863474 /* EasyCSV2SQLite-Info.plist */ = {isa = PBXFileReference; path = "EasyCSV2SQLite-Info.plist"; sourceTree = "<group>"; };
+		0A33D4B413DF092700863474 /* EasyCSV2SQLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EasyCSV2SQLite-Info.plist"; sourceTree = "<group>"; };
 		0A33D4B613DF092700863474 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A33D4B813DF092700863474 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0A33D4BA13DF092700863474 /* EasyCSV2SQLite-Prefix.pch */ = {isa = PBXFileReference; path = "EasyCSV2SQLite-Prefix.pch"; sourceTree = "<group>"; };
+		0A33D4BA13DF092700863474 /* EasyCSV2SQLite-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyCSV2SQLite-Prefix.pch"; sourceTree = "<group>"; };
 		0A33D4BC13DF092700863474 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		0A33D4BE13DF092800863474 /* EasyCSV2SQLiteAppDelegate.h */ = {isa = PBXFileReference; path = EasyCSV2SQLiteAppDelegate.h; sourceTree = "<group>"; };
+		0A33D4BE13DF092800863474 /* EasyCSV2SQLiteAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyCSV2SQLiteAppDelegate.h; sourceTree = "<group>"; };
 		0A33D4BF13DF092800863474 /* EasyCSV2SQLiteAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyCSV2SQLiteAppDelegate.m; sourceTree = "<group>"; };
 		0A33D4C213DF092800863474 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0AD725DB13DF14CC00EB8D52 /* DDFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileReader.h; sourceTree = "<group>"; };
+		0AD725DC13DF14CC00EB8D52 /* DDFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileReader.m; sourceTree = "<group>"; };
+		0AD725DF13DF18E500EB8D52 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD725E013DF18E500EB8D52 /* libsqlite3.0.dylib in Frameworks */,
 				0A33D4AD13DF092700863474 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +52,7 @@
 		0A33D49D13DF092700863474 = {
 			isa = PBXGroup;
 			children = (
+				0AD725DF13DF18E500EB8D52 /* libsqlite3.0.dylib */,
 				0A33D4B213DF092700863474 /* EasyCSV2SQLite */,
 				0A33D4AB13DF092700863474 /* Frameworks */,
 				0A33D4A913DF092700863474 /* Products */,
@@ -86,6 +93,8 @@
 				0A33D4BF13DF092800863474 /* EasyCSV2SQLiteAppDelegate.m */,
 				0A33D4C113DF092800863474 /* MainMenu.xib */,
 				0A33D4B313DF092700863474 /* Supporting Files */,
+				0AD725DB13DF14CC00EB8D52 /* DDFileReader.h */,
+				0AD725DC13DF14CC00EB8D52 /* DDFileReader.m */,
 			);
 			path = EasyCSV2SQLite;
 			sourceTree = "<group>";
@@ -167,6 +176,7 @@
 			files = (
 				0A33D4B913DF092700863474 /* main.m in Sources */,
 				0A33D4C013DF092800863474 /* EasyCSV2SQLiteAppDelegate.m in Sources */,
+				0AD725DD13DF14CC00EB8D52 /* DDFileReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +296,7 @@
 				0A33D4C813DF092800863474 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
