@@ -18,7 +18,9 @@
 @synthesize progressBar;
 @synthesize mainTableView;
 @synthesize lineEndings;
+@synthesize codeGenerationPanel;
 @synthesize window;
+
 
 - (NSString*)  getDelimiter {
     if ([lineEndings.selectedItem.title isEqualToString:@"CR"]) {
@@ -224,6 +226,7 @@
         [thisColumn setWidth: (mainTableView.frame.size.width / [columns count])  ];
         [mainTableView addTableColumn:thisColumn];
         columnIndex++;
+        [thisColumn release];
     }
 
     [mainTableView reloadData];
@@ -335,8 +338,10 @@
         NSString* thisStr = [columns objectAtIndex:columnIndex]; 
         
         return thisStr;
-    } else
-        return @"";
+    } else {
+        [reader release];
+        return @"";        
+    }
 }
 
 

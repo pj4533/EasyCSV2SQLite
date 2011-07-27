@@ -18,6 +18,7 @@
     NSProgressIndicator *progressBar;
     NSTableView *mainTableView;
     NSPopUpButton *lineEndings;
+    NSPanel *codeGenerationPanel;
 }
 @property (assign) IBOutlet NSTextField *csvFile;
 @property (assign) IBOutlet NSTextField *sqliteFile;
@@ -25,11 +26,11 @@
 @property (assign) IBOutlet NSProgressIndicator *progressBar;
 @property (assign) IBOutlet NSTableView *mainTableView;
 @property (assign) IBOutlet NSPopUpButton *lineEndings;
+@property (assign) IBOutlet NSPanel *codeGenerationPanel;
 
 @property (assign) IBOutlet NSWindow *window;
 - (IBAction)browseClicked:(id)sender;
 - (IBAction)chooseClicked:(id)sender;
 - (IBAction)goClicked:(id)sender;
-
 
 @end
