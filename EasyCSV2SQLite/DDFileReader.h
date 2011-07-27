@@ -3,7 +3,7 @@
 //  EasyCSV2SQLite
 //
 //  Created by Paul James Gray on 7/26/11.
-//  Copyright 2011 Galactic Fractures. All rights reserved.
+//  Copyright 2011 Say Goodnight Software. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -3,7 +3,7 @@
 //  EasyCSV2SQLite
 //
 //  Created by Paul James Gray on 7/26/11.
-//  Copyright 2011 Galactic Fractures. All rights reserved.
+//  Copyright 2011 Say Goodnight Software. All rights reserved.
 //
 
 #import "EasyCSV2SQLiteAppDelegate.h"
@@ -17,7 +17,17 @@
 @synthesize createdTableName;
 @synthesize progressBar;
 @synthesize mainTableView;
+@synthesize lineEndings;
 @synthesize window;
+
+- (NSString*)  getDelimiter {
+    if ([lineEndings.selectedItem.title isEqualToString:@"CR"]) {
+        return @"\r";
+    } else if ([lineEndings.selectedItem.title isEqualToString:@"CRLF"]) {
+        return @"\r\n";
+    } else
+        return @"\n";
+}
 
 - (NSArray*) columnsFromLine:(NSString*) line {
     NSScanner *scanner = [NSScanner scannerWithString:line];
@@ -87,6 +97,7 @@
     columnNames = [[NSMutableArray alloc] init];
     
     DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:pathToFile];
+    reader.lineDelimiter = [self getDelimiter];
     NSString * line = [reader readLine];
     [reader release];
     
@@ -110,7 +121,7 @@
     }
     sqlStatement = [sqlStatement stringByAppendingString:@");"];
     
-    NSLog(@"tablecreate: %@", sqlStatement);
+//    NSLog(@"tablecreate: %@", sqlStatement);
     
     if(sqlite3_exec(db, [sqlStatement UTF8String], NULL, NULL, NULL) != SQLITE_OK) { 
         sqlite3_close(db);
@@ -122,6 +133,7 @@
 - (void) addLinesToDB:(sqlite3*) db fromFilePath:(NSString*) pathToFile  fromTableName:(NSString*) tableName{
     
     DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:pathToFile];
+    reader.lineDelimiter = [self getDelimiter];
     [progressBar setMinValue:0];
     [progressBar setMaxValue:[reader totalFileLength]];
     [progressBar setUsesThreadedAnimation:YES];
@@ -149,6 +161,7 @@
         
         count = 0;
         for (NSString* thisValue in columns) {
+            thisValue = [thisValue stringByReplacingOccurrencesOfString:@"'" withString:@""];
             sqlStatement = [sqlStatement stringByAppendingFormat:@"'%@'", thisValue];            
             count++;
             if (count < ([columns count])) {
@@ -186,10 +199,19 @@
 
 - (void) initializeTable {
     DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:[csvFile stringValue]];
+    reader.lineDelimiter = [self getDelimiter];
     NSString * line = [reader readLine];
     [reader release];
     
     
+    NSMutableArray* columnsToDel = [[NSMutableArray alloc] initWithCapacity:[[mainTableView tableColumns] count]];
+    for (NSTableColumn* thisColumn in [mainTableView tableColumns]) {
+        [columnsToDel addObject:thisColumn];
+    }
+    for (NSTableColumn* thisColumn in columnsToDel) {
+        [mainTableView removeTableColumn:thisColumn];
+    }
+    [columnsToDel release];
     
     int columnIndex = 0;
     NSArray* columns = [self columnsFromLine:line];
@@ -199,12 +221,12 @@
         
         NSTableColumn* thisColumn = [[NSTableColumn alloc] initWithIdentifier:[NSString stringWithFormat:@"%d",columnIndex]];
         [thisColumn.headerCell setStringValue:thisStr];
-        [thisColumn setWidth:([thisStr length] * 10)];
+        [thisColumn setWidth: (mainTableView.frame.size.width / [columns count])  ];
         [mainTableView addTableColumn:thisColumn];
         columnIndex++;
     }
 
-    
+    [mainTableView reloadData];
 }
 
 - (IBAction)browseClicked:(id)sender {
@@ -212,6 +234,10 @@
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
     [openDlg setDelegate:self];
     
+    NSArray* fileTypes = [NSArray arrayWithObjects:@"csv", @"CSV", nil];
+    [openDlg setAllowedFileTypes:fileTypes];
+    [openDlg setAllowsOtherFileTypes:NO];
+
     // Enable the selection of files in the dialog.
     [openDlg setCanChooseFiles:YES];
     [openDlg setCanChooseDirectories:NO];
@@ -279,26 +305,38 @@
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return 5;
+    return 20;
 }
+
+- (BOOL) tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    return NO;
+}
+
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
     DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:[csvFile stringValue]];
+    reader.lineDelimiter = [self getDelimiter];
+    
     [reader readLine];
-    for (int i=0; i < rowIndex; i++) {
+    int index = 0;
+    while ((index < rowIndex) && (reader.currentOffset < reader.totalFileLength)) {
         [reader readLine];
+        index++;
     }
     
-    NSString * line = [reader readLine];
-    [reader release];
-    
-    
-    
-    NSArray* columns = [self columnsFromLine:line];
-    int columnIndex = [[aTableColumn identifier] intValue];
-    NSString* thisStr = [columns objectAtIndex:columnIndex]; 
-
-    return thisStr;
+    if (reader.currentOffset < reader.totalFileLength) {
+        NSString * line = [reader readLine];
+        [reader release];
+        
+        
+        
+        NSArray* columns = [self columnsFromLine:line];
+        int columnIndex = [[aTableColumn identifier] intValue];
+        NSString* thisStr = [columns objectAtIndex:columnIndex]; 
+        
+        return thisStr;
+    } else
+        return @"";
 }
 
 
