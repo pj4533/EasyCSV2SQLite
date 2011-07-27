@@ -19,6 +19,7 @@
     NSTableView *mainTableView;
     NSPopUpButton *lineEndings;
     NSPanel *codeGenerationPanel;
+    NSTextView *codeTextView;
 }
 @property (assign) IBOutlet NSTextField *csvFile;
 @property (assign) IBOutlet NSTextField *sqliteFile;
@@ -27,10 +28,13 @@
 @property (assign) IBOutlet NSTableView *mainTableView;
 @property (assign) IBOutlet NSPopUpButton *lineEndings;
 @property (assign) IBOutlet NSPanel *codeGenerationPanel;
+@property (assign) IBOutlet NSTextView *codeTextView;
 
 @property (assign) IBOutlet NSWindow *window;
 - (IBAction)browseClicked:(id)sender;
 - (IBAction)chooseClicked:(id)sender;
 - (IBAction)goClicked:(id)sender;
+- (IBAction)codeClicked:(id)sender;
+- (IBAction)closeClicked:(id)sender;
 
 @end

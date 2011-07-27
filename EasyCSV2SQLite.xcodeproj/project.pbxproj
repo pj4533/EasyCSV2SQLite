@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A11231A13DFC71F00A50EAD /* columnRead_repeated.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A11231513DFC71F00A50EAD /* columnRead_repeated.txt */; };
+		0A11231B13DFC71F00A50EAD /* dictAlloc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A11231613DFC71F00A50EAD /* dictAlloc.txt */; };
+		0A11231C13DFC71F00A50EAD /* dictColumns__repeated.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A11231713DFC71F00A50EAD /* dictColumns__repeated.txt */; };
+		0A11231D13DFC71F00A50EAD /* readDatabase_footer.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A11231813DFC71F00A50EAD /* readDatabase_footer.txt */; };
+		0A11231E13DFC71F00A50EAD /* readDatabaseHeader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A11231913DFC71F00A50EAD /* readDatabaseHeader.txt */; };
 		0A33D4AD13DF092700863474 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A33D4AC13DF092700863474 /* Cocoa.framework */; };
 		0A33D4B713DF092700863474 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A33D4B513DF092700863474 /* InfoPlist.strings */; };
 		0A33D4B913DF092700863474 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33D4B813DF092700863474 /* main.m */; };
@@ -19,6 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A11231513DFC71F00A50EAD /* columnRead_repeated.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = columnRead_repeated.txt; sourceTree = "<group>"; };
+		0A11231613DFC71F00A50EAD /* dictAlloc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dictAlloc.txt; sourceTree = "<group>"; };
+		0A11231713DFC71F00A50EAD /* dictColumns__repeated.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dictColumns__repeated.txt; sourceTree = "<group>"; };
+		0A11231813DFC71F00A50EAD /* readDatabase_footer.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readDatabase_footer.txt; sourceTree = "<group>"; };
+		0A11231913DFC71F00A50EAD /* readDatabaseHeader.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readDatabaseHeader.txt; sourceTree = "<group>"; };
 		0A33D4A813DF092700863474 /* EasyCSV2SQLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyCSV2SQLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A33D4AC13DF092700863474 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0A33D4AF13DF092700863474 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -105,6 +115,11 @@
 		0A33D4B313DF092700863474 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A11231513DFC71F00A50EAD /* columnRead_repeated.txt */,
+				0A11231613DFC71F00A50EAD /* dictAlloc.txt */,
+				0A11231713DFC71F00A50EAD /* dictColumns__repeated.txt */,
+				0A11231813DFC71F00A50EAD /* readDatabase_footer.txt */,
+				0A11231913DFC71F00A50EAD /* readDatabaseHeader.txt */,
 				0A33D4B413DF092700863474 /* EasyCSV2SQLite-Info.plist */,
 				0A33D4B513DF092700863474 /* InfoPlist.strings */,
 				0A33D4B813DF092700863474 /* main.m */,
@@ -168,6 +183,11 @@
 				0A33D4BD13DF092700863474 /* Credits.rtf in Resources */,
 				0A33D4C313DF092800863474 /* MainMenu.xib in Resources */,
 				0AA00D7113DFC30E000EB3E1 /* icon.icns in Resources */,
+				0A11231A13DFC71F00A50EAD /* columnRead_repeated.txt in Resources */,
+				0A11231B13DFC71F00A50EAD /* dictAlloc.txt in Resources */,
+				0A11231C13DFC71F00A50EAD /* dictColumns__repeated.txt in Resources */,
+				0A11231D13DFC71F00A50EAD /* readDatabase_footer.txt in Resources */,
+				0A11231E13DFC71F00A50EAD /* readDatabaseHeader.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,12 @@
+
+												nil];
+                
+                [databaseArray addObject:thisDict];
+			}
+		}
+		// Release the compiled statement from memory
+		sqlite3_finalize(compiledStatement);
+        
+	}
+	sqlite3_close(database); 
+}

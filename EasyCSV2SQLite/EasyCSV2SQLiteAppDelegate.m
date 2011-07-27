@@ -19,6 +19,7 @@
 @synthesize mainTableView;
 @synthesize lineEndings;
 @synthesize codeGenerationPanel;
+@synthesize codeTextView;
 @synthesize window;
 
 
@@ -305,6 +306,96 @@
     } else {
         NSLog(@"Error in opening db file.");        
     }
+}
+
+- (IBAction)codeClicked:(id)sender {
+    NSString* pathToCSV = [csvFile stringValue];
+    NSString* pathToSqlite = [sqliteFile stringValue];
+    NSString* tableName = [createdTableName stringValue];
+    
+    if ([pathToCSV isEqualToString:@""]) {
+        NSRunAlertPanel(@"Error", @"Invalid CSV Path", nil, nil, nil);
+        return;
+    }
+    if ([pathToSqlite isEqualToString:@""]) {
+        NSRunAlertPanel(@"Error", @"Invalid sqlite Path", nil, nil, nil);
+        return;
+    }
+    if ([tableName isEqualToString:@""]) {
+        NSRunAlertPanel(@"Error", @"Invalid table name", nil, nil, nil);
+        return;
+    }
+
+    codeTextView.font = [NSFont fontWithName:@"Courier" size:12];
+    
+    NSString *readDatabaseHeader = [[NSBundle mainBundle] pathForResource:@"readDatabaseHeader" ofType:@"txt"]; 
+    NSString *readDatabaseHeaderStr = [NSString stringWithContentsOfFile:readDatabaseHeader encoding:NSUTF8StringEncoding error:nil];   
+    
+    NSString *columnRead = [[NSBundle mainBundle] pathForResource:@"columnRead_repeated" ofType:@"txt"]; 
+    NSString *columnReadStr = [NSString stringWithContentsOfFile:columnRead encoding:NSUTF8StringEncoding error:nil];   
+
+    NSString *dictAlloc = [[NSBundle mainBundle] pathForResource:@"dictAlloc" ofType:@"txt"]; 
+    NSString *dictAllocStr = [NSString stringWithContentsOfFile:dictAlloc encoding:NSUTF8StringEncoding error:nil];   
+
+    NSString *dictColumns = [[NSBundle mainBundle] pathForResource:@"dictColumns__repeated" ofType:@"txt"]; 
+    NSString *dictColumnsStr = [NSString stringWithContentsOfFile:dictColumns encoding:NSUTF8StringEncoding error:nil];   
+
+    NSString *readDatabaseFooter = [[NSBundle mainBundle] pathForResource:@"readDatabase_footer" ofType:@"txt"]; 
+    NSString *readDatabaseFooterStr = [NSString stringWithContentsOfFile:readDatabaseFooter encoding:NSUTF8StringEncoding error:nil];   
+
+    // replace header stuff
+    readDatabaseHeaderStr = [readDatabaseHeaderStr stringByReplacingOccurrencesOfString:@"%%DB_FILEEXT%%" withString:[pathToSqlite pathExtension]];
+    NSString* dbFilename = [pathToSqlite lastPathComponent];
+    NSString* extWithDot = @".";
+    extWithDot = [extWithDot stringByAppendingString:[pathToSqlite pathExtension]];
+    dbFilename = [dbFilename stringByReplacingOccurrencesOfString:extWithDot withString:@""];
+    readDatabaseHeaderStr = [readDatabaseHeaderStr stringByReplacingOccurrencesOfString:@"%%DB_FILENAME%%" withString:dbFilename];
+    readDatabaseHeaderStr = [readDatabaseHeaderStr stringByReplacingOccurrencesOfString:@"%%DB_TABLENAME%%" withString:tableName];
+    NSString *codeString = [NSString stringWithString:readDatabaseHeaderStr];
+    
+    
+    // iterate on column read stuff
+    DDFileReader * reader = [[DDFileReader alloc] initWithFilePath:[csvFile stringValue]];
+    reader.lineDelimiter = [self getDelimiter];
+    NSString * line = [reader readLine];
+    [reader release];
+        
+    NSArray* columns = [self columnsFromLine:line];
+    int index = 0;
+    for (NSString* thisStr in columns) {
+        thisStr = [thisStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        thisStr = [thisStr stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        
+        NSString* thisColumnReadStr = [columnReadStr stringByReplacingOccurrencesOfString:@"%%COLUMN_NAME%%" withString:thisStr];
+        thisColumnReadStr = [thisColumnReadStr stringByReplacingOccurrencesOfString:@"%%COLUMN_INDEX%%" withString:[NSString stringWithFormat:@"%d",index]];
+        codeString = [codeString stringByAppendingString:thisColumnReadStr];
+        index++;
+    }
+
+    // dictionary alloc
+    codeString = [codeString stringByAppendingString:dictAllocStr];
+    
+    // iterate on dict stuff    
+    for (NSString* thisStr in columns) {
+        thisStr = [thisStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        thisStr = [thisStr stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        
+        NSString* thisColumnDictStr = [dictColumnsStr stringByReplacingOccurrencesOfString:@"%%COLUMN_NAME%%" withString:thisStr];
+        codeString = [codeString stringByAppendingString:thisColumnDictStr];
+    }
+    
+    codeString = [codeString stringByAppendingString:readDatabaseFooterStr];
+    
+    
+    
+    [codeTextView setString:codeString];
+    
+    [[NSApplication sharedApplication] runModalForWindow:codeGenerationPanel];
+    [codeGenerationPanel orderOut:self];
+}
+
+- (IBAction)closeClicked:(id)sender {
+    [[NSApplication sharedApplication] stopModal];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {

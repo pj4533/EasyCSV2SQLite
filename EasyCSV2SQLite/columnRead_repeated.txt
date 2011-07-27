@@ -1,0 +1,5 @@
+				NSString *%%COLUMN_NAME%% = nil;
+				rawCharStr = (char*) sqlite3_column_text(compiledStatement, %%COLUMN_INDEX%%);
+				if (rawCharStr) {
+    				%%COLUMN_NAME%% = [NSString stringWithUTF8String:rawCharStr];
+				}

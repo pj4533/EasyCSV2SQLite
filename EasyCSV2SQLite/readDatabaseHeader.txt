@@ -1,0 +1,18 @@
+-(void) readDatabase {
+    NSString* databasePath = [[NSBundle mainBundle] pathForResource:@"%%DB_FILENAME%%" ofType:@"%%DB_FILEEXT%%"];
+
+    databaseArray = [[NSMutableArray alloc] init];
+
+    // Setup the database object
+	sqlite3 *database;
+
+    // Open the database from the users filessytem
+	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
+		// Setup the SQL Statement and compile it for faster access
+		const char *sqlStatement = "select * from %%DB_TABLENAME%%";
+		sqlite3_stmt *compiledStatement;
+		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
+			// Loop through the results and add them to the feeds array
+			while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
+				// Read the data from the result row
+                char* rawCharStr;
