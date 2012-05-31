@@ -42,7 +42,7 @@
 		0A33D4BE13DF092800863474 /* EasyCSV2SQLiteAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyCSV2SQLiteAppDelegate.h; sourceTree = "<group>"; };
 		0A33D4BF13DF092800863474 /* EasyCSV2SQLiteAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyCSV2SQLiteAppDelegate.m; sourceTree = "<group>"; };
 		0A33D4C213DF092800863474 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		0AA00D7013DFC30E000EB3E1 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		0AA00D7013DFC30E000EB3E1 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		0AD725DB13DF14CC00EB8D52 /* DDFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileReader.h; sourceTree = "<group>"; };
 		0AD725DC13DF14CC00EB8D52 /* DDFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileReader.m; sourceTree = "<group>"; };
 		0AD725DF13DF18E500EB8D52 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -64,8 +64,6 @@
 		0A33D49D13DF092700863474 = {
 			isa = PBXGroup;
 			children = (
-				0AA00D7013DFC30E000EB3E1 /* icon.icns */,
-				0AD725DF13DF18E500EB8D52 /* libsqlite3.0.dylib */,
 				0A33D4B213DF092700863474 /* EasyCSV2SQLite */,
 				0A33D4AB13DF092700863474 /* Frameworks */,
 				0A33D4A913DF092700863474 /* Products */,
@@ -83,6 +81,7 @@
 		0A33D4AB13DF092700863474 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AD725DF13DF18E500EB8D52 /* libsqlite3.0.dylib */,
 				0A33D4AC13DF092700863474 /* Cocoa.framework */,
 				0A33D4AE13DF092700863474 /* Other Frameworks */,
 			);
@@ -115,6 +114,7 @@
 		0A33D4B313DF092700863474 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0AA00D7013DFC30E000EB3E1 /* icon.icns */,
 				0A11231513DFC71F00A50EAD /* columnRead_repeated.txt */,
 				0A11231613DFC71F00A50EAD /* dictAlloc.txt */,
 				0A11231713DFC71F00A50EAD /* dictColumns__repeated.txt */,
@@ -155,7 +155,7 @@
 		0A33D49F13DF092700863474 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "Galactic Fractures";
+				ORGANIZATIONNAME = "Say Goodnight Software";
 			};
 			buildConfigurationList = 0A33D4A213DF092700863474 /* Build configuration list for PBXProject "EasyCSV2SQLite" */;
 			compatibilityVersion = "Xcode 3.2";
